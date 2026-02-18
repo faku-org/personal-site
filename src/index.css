@@ -1,10 +1,21 @@
 /* ─── Design Tokens ─── */
 :root {
-  --bg-color: #F5E5E1;
-  --accent-warm: #F9B487;
-  --primary-teal: #427A76;
-  --text-dark: #174143;
-  --card-shadow: rgba(23, 65, 67, 0.12);
+  --bg-color: #DAFFFB;
+  --bg-deep: #001C30;
+  --accent: #64CCC5;
+  --primary: #176B87;
+  --text-dark: #001C30;
+  --card-shadow: rgba(0, 28, 48, 0.15);
+
+  /* Glass tokens */
+  --glass-bg: rgba(218, 255, 251, 0.45);
+  --glass-border: rgba(100, 204, 197, 0.35);
+  --glass-blur: 18px;
+  --glass-highlight: rgba(255, 255, 255, 0.5);
+
+  /* Grid background */
+  --grid-color: rgba(23, 107, 135, 0.08);
+  --grid-size: 60px;
 
   --font-stack: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
@@ -25,11 +36,17 @@
 
 /* ─── Dark Theme ─── */
 [data-theme='dark'] {
-  --bg-color: #0F1F20;
-  --accent-warm: #D4885B;
-  --primary-teal: #5EA8A3;
-  --text-dark: #E8DDD9;
-  --card-shadow: rgba(0, 0, 0, 0.35);
+  --bg-color: #001C30;
+  --bg-deep: #000E18;
+  --accent: #64CCC5;
+  --primary: #64CCC5;
+  --text-dark: #DAFFFB;
+  --card-shadow: rgba(0, 0, 0, 0.5);
+
+  --glass-bg: rgba(0, 28, 48, 0.55);
+  --glass-border: rgba(100, 204, 197, 0.2);
+  --glass-highlight: rgba(100, 204, 197, 0.08);
+  --grid-color: rgba(100, 204, 197, 0.06);
 
   color-scheme: dark;
 }
@@ -47,7 +64,43 @@ body {
   min-height: 100vh;
   min-width: 320px;
   background-color: var(--bg-color);
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition: background-color 0.5s ease, color 0.5s ease;
+
+  /* Grid background */
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  background-attachment: fixed;
+}
+
+/* Ambient glow blobs */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.5s ease;
+}
+
+body::before {
+  width: 600px;
+  height: 600px;
+  background: var(--accent);
+  top: -10%;
+  left: -10%;
+}
+
+body::after {
+  width: 500px;
+  height: 500px;
+  background: var(--primary);
+  bottom: -10%;
+  right: -10%;
 }
 
 a {
@@ -56,6 +109,6 @@ a {
 }
 
 ::selection {
-  background-color: var(--accent-warm);
-  color: var(--text-dark);
+  background-color: var(--accent);
+  color: var(--bg-deep);
 }

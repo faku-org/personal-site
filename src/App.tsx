@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import { siteConfig, socialLinks, projects } from './config'
 
 /* ─── Icons ─── */
 
@@ -46,48 +47,19 @@ const InstagramIcon = () => (
   </svg>
 )
 
-/* ─── Data ─── */
+/* ─── Icon Registry ─── */
 
-interface Project {
-  title: string
-  url: string
-  description: string
-  modifier: string
+const iconMap: Record<string, () => React.JSX.Element> = {
+  GitHub: GitHubIcon,
+  LinkedIn: LinkedInIcon,
+  X: XIcon,
+  Instagram: InstagramIcon,
 }
 
-const projects: Project[] = [
-  {
-    title: 'itica.lat',
-    url: 'https://itica.lat',
-    description: 'Technology-driven business solutions. Building digital infrastructure for modern enterprises.',
-    modifier: 'itica',
-  },
-  {
-    title: 'talentum.live',
-    url: 'https://talentum.live',
-    description: 'A talent agency connecting creative professionals with opportunities that matter.',
-    modifier: 'talentum',
-  },
-  {
-    title: 'adastrarp.com',
-    url: 'https://adastrarp.com',
-    description: 'A FiveM roleplay server — immersive worlds, community-driven storytelling.',
-    modifier: 'adastra',
-  },
-]
-
-interface Social {
-  label: string
-  url: string
-  icon: () => React.JSX.Element
-}
-
-const socials: Social[] = [
-  { label: 'GitHub', url: 'https://github.com/facundopresa', icon: GitHubIcon },
-  { label: 'LinkedIn', url: 'https://linkedin.com/in/facundopresa', icon: LinkedInIcon },
-  { label: 'X', url: 'https://x.com/facundopresa', icon: XIcon },
-  { label: 'Instagram', url: 'https://instagram.com/facundopresa', icon: InstagramIcon },
-]
+const socials = socialLinks.map((s) => ({
+  ...s,
+  icon: iconMap[s.label] ?? (() => null),
+}))
 
 /* ─── Theme Hook ─── */
 
@@ -146,12 +118,16 @@ function App() {
       <header className="hero">
         <div>
           <h1 className="hero__name">
-            Facundo
-            <br />
-            Presa
+            {siteConfig.name.split(' ').map((word, i) => (
+              <span key={i}>{i > 0 && <br />}{word}</span>
+            ))}
           </h1>
           <p className="hero__tagline">
-            Entrepreneur&ensp;|&ensp;Marketing&ensp;|&ensp;Design&ensp;|&ensp;Programming
+            {siteConfig.tagline.split('|').map((segment, i, arr) => (
+              <span key={i}>
+                {segment.trim()}{i < arr.length - 1 && <>&ensp;|&ensp;</>}
+              </span>
+            ))}
           </p>
           <SocialLinks className="socials" />
         </div>
@@ -191,17 +167,17 @@ function App() {
             <br />
             together<span className="bauhaus-dot" />
           </h2>
-          <p className="footer__subtext">Open for collaborations &amp; new ventures.</p>
+          <p className="footer__subtext">{siteConfig.footerSubtext}</p>
         </div>
         <div className="footer__right">
-          <a className="footer__email" href="mailto:hello@facundopresa.com">
-            hello@facundopresa.com
+          <a className="footer__email" href={`mailto:${siteConfig.email}`}>
+            {siteConfig.email}
           </a>
           <SocialLinks className="footer__socials" />
         </div>
       </footer>
 
-      <p className="footer__bottom">&copy; {new Date().getFullYear()} Facundo Presa</p>
+      <p className="footer__bottom">&copy; {new Date().getFullYear()} {siteConfig.name}</p>
     </div>
   )
 }
