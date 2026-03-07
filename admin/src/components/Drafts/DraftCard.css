@@ -1,0 +1,100 @@
+/**
+ * /admin/src/components/Drafts/DraftCard.css
+ * Individual draft card styles in the sidebar.
+ */
+
+.draft-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.draft-card:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.07);
+}
+
+.draft-card--active {
+  background: rgba(14, 165, 233, 0.08);
+  border-color: rgba(14, 165, 233, 0.2);
+}
+
+.draft-card__info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.draft-card__name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #E8F4F8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.draft-card__badge {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.draft-card__badge--draft {
+  background: rgba(14, 165, 233, 0.12);
+  color: #38BDF8;
+  border: 1px solid rgba(14, 165, 233, 0.25);
+}
+
+.draft-card__badge--published {
+  background: rgba(34, 197, 94, 0.12);
+  color: #4ADE80;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.draft-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.draft-card__time {
+  font-size: 0.7rem;
+  color: rgba(232, 244, 248, 0.45);
+}
+
+.draft-card__delete {
+  display: none;
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  color: rgba(232, 244, 248, 0.45);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.draft-card:hover .draft-card__delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.draft-card__delete:hover {
+  color: #FB7185;
+  background: rgba(251, 113, 133, 0.1);
+}

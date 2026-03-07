@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import { siteConfig, socialLinks, projects } from './config'
+import BlogIndex from './blog/BlogIndex'
+import BlogPost from './blog/BlogPost'
 
 /* ─── Icons ─── */
 
@@ -100,20 +103,9 @@ function SocialLinks({ className }: { className?: string }) {
   )
 }
 
-function App() {
-  const [dark, toggleTheme] = useTheme()
-
+function HomePage() {
   return (
-    <div className="portfolio">
-      {/* ── Theme Toggle ── */}
-      <button
-        className="theme-toggle"
-        onClick={toggleTheme}
-        aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-      >
-        {dark ? <SunIcon /> : <MoonIcon />}
-      </button>
-
+    <>
       {/* ── Hero ── */}
       <header className="hero">
         <div>
@@ -178,6 +170,28 @@ function App() {
       </footer>
 
       <p className="footer__bottom">&copy; {new Date().getFullYear()} {siteConfig.name}</p>
+    </>
+  )
+}
+
+function App() {
+  const [dark, toggleTheme] = useTheme()
+
+  return (
+    <div className="portfolio">
+      <button
+        className="theme-toggle"
+        onClick={toggleTheme}
+        aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+      >
+        {dark ? <SunIcon /> : <MoonIcon />}
+      </button>
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/blog" element={<BlogIndex />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+      </Routes>
     </div>
   )
 }

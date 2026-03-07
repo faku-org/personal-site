@@ -1,0 +1,79 @@
+/**
+ * /admin/src/components/Drafts/DraftList.css
+ * Sidebar layout, header, scrollable items, modal actions.
+ */
+
+.draft-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: var(--sidebar-width);
+  min-width: 220px;
+  background: #001C30;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+.draft-list__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  flex-shrink: 0;
+}
+
+.draft-list__title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #E8F4F8;
+  letter-spacing: 0.02em;
+}
+
+.draft-list__items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.draft-list__empty {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.82rem;
+  color: rgba(232, 244, 248, 0.45);
+}
+
+.draft-list__modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.draft-list__confirm-text {
+  font-size: 0.9rem;
+  color: #E8F4F8;
+  line-height: 1.5;
+}
+
+/* ─── Responsive drawer ─── */
+
+@media (max-width: 900px) {
+  .draft-list {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 200;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .draft-list--open {
+    transform: translateX(0);
+  }
+}

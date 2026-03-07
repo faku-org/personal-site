@@ -3,15 +3,22 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "workspaces": ["admin", "server"],
   "scripts": {
     "dev": "vite",
+    "dev:server": "cd server && bun run dev",
+    "dev:admin": "cd admin && bun run dev",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "buffer": "^6.0.3",
+    "gray-matter": "^4.0.3",
+    "marked": "^17.0.4",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.13.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

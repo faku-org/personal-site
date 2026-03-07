@@ -1,0 +1,59 @@
+/**
+ * /admin/src/components/Frontmatter/FrontmatterForm.css
+ * Single-column grid layout for the metadata form in the right panel.
+ */
+
+.frontmatter-form {
+  padding: 1rem 1.5rem 1.5rem 1rem;
+}
+
+.frontmatter-form__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.frontmatter-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.frontmatter-form__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(232, 244, 248, 0.45);
+  letter-spacing: 0.02em;
+}
+
+.frontmatter-form__textarea {
+  padding: 0.55rem 0.9rem;
+  font-family: var(--font-stack);
+  font-size: 0.88rem;
+  color: #E8F4F8;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  outline: none;
+  resize: vertical;
+  min-height: 48px;
+  transition: border-color 0.25s ease;
+}
+
+.frontmatter-form__textarea::placeholder {
+  color: rgba(232, 244, 248, 0.25);
+}
+
+.frontmatter-form__textarea:focus {
+  border-color: rgba(14, 165, 233, 0.5);
+}
+
+.frontmatter-form__char-count {
+  font-size: 0.7rem;
+  color: rgba(232, 244, 248, 0.3);
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  /* already single column, nothing to override */
+}

@@ -1,0 +1,87 @@
+/**
+ * /admin/src/components/UI/Button.css
+ * Button styles with variant and size modifiers.
+ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-family: var(--font-stack);
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ─── Sizes ─── */
+
+.btn--sm {
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: 6px;
+}
+
+.btn--md {
+  padding: 8px 18px;
+  font-size: 13px;
+}
+
+.btn--lg {
+  padding: 10px 22px;
+  font-size: 14px;
+}
+
+/* ─── Variants ─── */
+
+.btn--primary {
+  background: #0284C7;
+  color: #fff;
+}
+
+.btn--primary:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.btn--secondary {
+  background: rgba(255, 255, 255, 0.03);
+  color: #E8F4F8;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.btn--secondary:hover:not(:disabled) {
+  border-color: rgba(14, 165, 233, 0.3);
+  background: rgba(14, 165, 233, 0.08);
+}
+
+.btn--danger {
+  background: #E11D48;
+  color: #fff;
+}
+
+.btn--danger:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: rgba(232, 244, 248, 0.45);
+}
+
+.btn--ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+  color: #E8F4F8;
+}

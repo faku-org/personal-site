@@ -1,0 +1,52 @@
+/**
+ * /admin/src/styles/tokens.css
+ * Design system tokens — dark theme admin dashboard.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+.jetbrains-mono {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.plus-jakarta-sans {
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.ibm-plex-serif {
+  font-family: 'IBM Plex Serif', 'Georgia', serif;
+}
+
+:root {
+
+
+
+  /* Backgrounds */
+  --bg-color: #001C30;
+  --bg-deep: #001C30;
+
+  /* Brand */
+  --accent: #0EA5E9;
+  --accent-hover: #0284C7;
+  --primary: #0EA5E9;
+
+  /* Text */
+  --text-dark: #E8F4F8;
+  --text-muted: rgba(232, 244, 248, 0.45);
+
+  /* Shadows & glass */
+  --card-shadow: rgba(0, 0, 0, 0.3);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.07);
+  --glass-blur: 8px;
+  --glass-highlight: rgba(255, 255, 255, 0.04);
+
+  /* Grid dot pattern */
+  --grid-color: rgba(255, 255, 255, 0.04);
+  --grid-size: 24px;
+
+  /* Layout */
+  --font-stack: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'IBM Plex Serif', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
