@@ -1,24 +1,20 @@
-name: Deploy to VPS
+name: Deploy
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+
+concurrency:
+  group: deploy-personal-site
+  cancel-in-progress: true
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+    timeout-minutes: 10
     steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          port: 52070
-          script: |
-            export PATH="$HOME/.bun/bin:$PATH"
-            cd /var/www/faku.pro
-            git pull origin main
-            bun install
-            bun run build
+      - name: Deploy
+        run: |
+          bash /home/hermes/deploy/generic.sh \
+            "faku.pro" \
+            "git@github.com:faku-org/personal-site.git"
