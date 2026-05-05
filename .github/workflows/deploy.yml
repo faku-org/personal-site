@@ -14,7 +14,4 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Deploy
-        run: |
-          bash /home/hermes/deploy/generic.sh \
-            "faku.pro" \
-            "git@github.com:faku-org/personal-site.git"
+        run: bash /home/hermes/deploy/personal-site.sh
