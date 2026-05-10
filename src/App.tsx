@@ -4,6 +4,7 @@ import './App.css'
 import { siteConfig, socialLinks, projects } from './config'
 import BlogIndex from './blog/BlogIndex'
 import BlogPost from './blog/BlogPost'
+import { SEO } from './components/SEO'
 
 /* ─── Icons ─── */
 
@@ -106,6 +107,23 @@ function SocialLinks({ className }: { className?: string }) {
 function HomePage() {
   return (
     <>
+      <SEO
+        title="Portfolio"
+        description="Facundo Presa — Entrepreneur, Design & Programming. Software developer building tools for education and the web."
+        canonical="/"
+        ogImage="/og-default.png"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Facundo Presa",
+          url: "https://faku.pro",
+          jobTitle: "Software Developer",
+          sameAs: [
+            "https://github.com/fakuuy",
+            "https://linkedin.com/in/fakup",
+          ],
+        }}
+      />
       {/* ── Hero ── */}
       <header className="hero">
         <div>
@@ -189,7 +207,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/blog" element={<BlogIndex />} />
+        <Route path="/blog" element={<><SEO title="Blog" description="Thoughts on tech, design, and building things." canonical="/blog" ogType="article" /><BlogIndex /></>} />
         <Route path="/blog/:slug" element={<BlogPost />} />
       </Routes>
     </div>

@@ -6,10 +6,11 @@
  * Dependencies: react-router-dom, marked, ../blog/blogLoader
  */
 
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { marked } from 'marked'
 import { getAllPosts, getPostBySlug } from './blogLoader'
+import { SEO } from '../components/SEO'
 import './BlogPost.css'
 
 // Configure marked for GitHub-flavored Markdown
@@ -49,17 +50,7 @@ export default function BlogPost() {
     return marked.parse(post.content) as string
   }, [post])
 
-  // SEO: update document title
-  useEffect(() => {
-    if (post) {
-      document.title = post.seoTitle ?? post.title
-    } else {
-      document.title = 'Post Not Found'
-    }
-    return () => {
-      document.title = 'Facundo Presa — Portfolio'
-    }
-  }, [post])
+
 
   /* ─── 404 State ─── */
   if (!post) {
@@ -79,8 +70,29 @@ export default function BlogPost() {
     )
   }
 
+  const articleStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    author: {
+      "@type": "Person",
+      name: post.author,
+    },
+    image: post.cover ? `https://faku.pro${post.cover}` : undefined,
+  }
+
   return (
     <article className="blog-post">
+      <SEO
+        title={post.seoTitle ?? post.title}
+        description={post.seoDescription ?? post.description}
+        canonical={`/blog/${post.slug}`}
+        ogImage={post.cover}
+        ogType="article"
+        structuredData={articleStructuredData}
+      />
       <Link to="/blog" className="blog-post__back">← Back to Blog</Link>
 
       {/* ─── Cover ─── */}
