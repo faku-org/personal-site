@@ -150,17 +150,17 @@
 .project-card--eternum {
   grid-column: 8 / 13;
   grid-row: 1;
-  background: linear-gradient(145deg, rgba(46, 16, 101, 0.85), rgba(109, 40, 217, 0.35));
+  background: linear-gradient(145deg, rgba(13, 96, 128, 0.75), rgba(10, 158, 153, 0.35));
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
-  border: 1px solid rgba(167, 139, 250, 0.25);
-  color: #f3e8ff;
+  border: 1px solid rgba(100, 204, 197, 0.3);
+  color: #DAFFFB;
 }
 
 .project-card--eternum::after {
-  width: 180px;
-  height: 180px;
-  background: #a855f7;
+  width: 200px;
+  height: 200px;
+  background: var(--primary);
   bottom: -50px;
   left: -40px;
 }
