@@ -21,8 +21,8 @@ export const siteConfig = {
 export const socialLinks = [
   { label: 'GitHub', url: 'https://github.com/fakuuy' },
   { label: 'LinkedIn', url: 'https://linkedin.com/in/fakup' },
-  { label: 'X', url: 'https://x.com/fakuu_uy' },
-  { label: 'Instagram', url: 'https://instagram.com/fakuu.uy' },
+  { label: 'X', url: 'https://x.com/faku_sys' },
+  { label: 'Instagram', url: 'https://instagram.com/faku.sys' },
 ] as const
 
 // ─── Project Cards ───
@@ -39,6 +39,13 @@ export const projects = [
     description:
       'Technology-driven business solutions. Building digital infrastructure for modern enterprises.',
     modifier: 'itica',
+  },
+  {
+    title: 'Eternum',
+    url: 'https://eternum.lat',
+    description:
+      'High School Team. A community of passionate students exploring the world of technology and innovation.',
+    modifier: 'eternum',
   },
   {
     title: 'Talentum',
