@@ -121,7 +121,7 @@ export default function App() {
             ☰
           </button>
           <span className="admin-header__brand">
-            faku.pro <span className="admin-header__sep">/</span> admin
+            facupresa.com <span className="admin-header__sep">/</span> admin
           </span>
         </div>
 
