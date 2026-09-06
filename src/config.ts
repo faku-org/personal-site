@@ -9,7 +9,7 @@ export const siteConfig = {
   tagline: 'Entrepreneur | Design | Programming',
 
   /** Contact email shown in the footer */
-  email: 'hola@faku.pro',
+  email: 'hola@facupresa.com',
 
   /** Footer call-to-action subtitle */
   footerSubtext: 'Open for collaborations & new ventures.',
