@@ -28,17 +28,17 @@ export const socialLinks = [
 // ─── Project Cards ───
 // Each card appears in the Bauhaus-style grid. The `modifier` controls which
 // CSS style variant is applied:
-//   • 'itica'    → dark teal card, spans 7 columns
+//   • 'wefaber'  → dark teal card, spans 7 columns
 //   • 'talentum' → peach card, spans 5 columns
 //   • 'adastra'  → teal wide card, spans full width
 
 export const projects = [
   {
-    title: 'Itica',
-    url: 'https://itica.lat',
+    title: 'WeFaber',
+    url: 'https://wefaber.net',
     description:
-      'Technology-driven business solutions. Building digital infrastructure for modern enterprises.',
-    modifier: 'itica',
+      'Software & applied AI studio from Uruguay. We fabricate real products — fast, beautiful and useful.',
+    modifier: 'wefaber',
   },
   {
     title: 'Eternum',
