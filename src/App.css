@@ -128,7 +128,7 @@
 }
 
 /* Card 1 — row 1, spans 7 cols */
-.project-card--itica {
+.project-card--wefaber {
   grid-column: 1 / 8;
   grid-row: 1;
   background: linear-gradient(145deg, rgba(0, 28, 48, 0.8), rgba(23, 107, 135, 0.4));
@@ -138,7 +138,7 @@
   color: #DAFFFB;
 }
 
-.project-card--itica::after {
+.project-card--wefaber::after {
   width: 220px;
   height: 220px;
   background: var(--accent);
@@ -427,7 +427,7 @@
     gap: 1.25rem;
   }
 
-  .project-card--itica,
+  .project-card--wefaber,
   .project-card--eternum,
   .project-card--talentum,
   .project-card--adastra {
