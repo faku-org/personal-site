@@ -24,6 +24,9 @@ Source of truth for content: [`src/config.ts`](../src/config.ts).
 | Projects | 12 hand-placed cards on a 12-col Bauhaus grid | Chronological timeline grouped by era |
 | Project detail | External link only | Modal with story + evolution |
 | Ornament | Gradient dot, floating accent block, per-card glow orbs | One 8×8 accent square |
+| Theme | System preference read once on first visit, then frozen | Follows the OS live until the reader toggles |
+| Locale | Browser language read once on first visit, then frozen | Follows the browser live until the reader toggles |
+| Type scale | Pure `vw` between the clamp bounds | `rem` + `vw`, so it tracks the browser's font-size setting |
 
 **Deleted outright:** all `--glass-*` visual behaviour, `float` keyframe
 animation, the `.hero__accent-block`, every `.project-card--*` rule (12 blocks
@@ -94,6 +97,27 @@ theme transition settled. All text ≥ 4.5:1.
 > If you change a colour, re-check it. The trap is `--accent`: it looks fine and
 > fails. Keep it out of `color:`.
 
+### Theme resolution
+
+`src/useTheme.ts` holds two pieces of state: the reader's explicit choice
+(`'light' | 'dark' | null`) and the current system preference. The rendered
+theme is the choice when there is one, and the system value otherwise.
+
+- **No choice yet** → follows `prefers-color-scheme`, and keeps following it: a
+  `matchMedia` listener updates the page the moment the OS flips, no reload.
+- **After the toggle** → the choice is written to `localStorage` and the OS is
+  ignored from then on.
+
+The earlier version wrote `localStorage` inside the mount effect, so the first
+system value it ever saw became permanent and the site stopped tracking the OS
+after the first visit. Persisting only on the toggle is what fixes that.
+
+A small inline script in `index.html` stamps `data-theme` on `<html>` before
+first paint, reading the same two inputs. Without it a dark-preferring reader
+gets a white flash while React mounts, because the tokens in `index.css` default
+to light. It is the one place where the resolution logic is duplicated, and that
+is the standard trade for avoiding the flash.
+
 ---
 
 ## 3. Typography
@@ -110,26 +134,67 @@ Loaded from Google Fonts via a single preconnected `<link>` in `index.html`
 sans stack so the blog's serif rules collapse into the grotesque instead of
 falling back to Georgia.
 
-### Scale (as specified; all headings `clamp()`)
+### Scale — fluid, and anchored to the reader's own font size
 
-| Element | Size | Weight | Tracking | Leading |
-| --- | --- | --- | --- | --- |
-| Hero name | `clamp(3.4rem, 15vw, 12rem)` | 800 | `-0.045em` | `0.82` |
-| Footer heading | `clamp(2.2rem, 7vw, 5rem)` | 800 | `-0.04em` | `0.88` |
-| Modal title | `clamp(2.2rem, 7vw, 4.5rem)` | 800 | `-0.045em` | `0.88` |
-| Era label | `clamp(2rem, 5.5vw, 4rem)` | 800 | `-0.04em` | `0.9` |
-| Story heading | `clamp(1.9rem, 4.5vw, 3.4rem)` | 800 | `-0.035em` | `0.92` |
-| Card title | `clamp(1.5rem, 3.4vw, 2.4rem)` | 700 | `-0.035em` | `1.0` |
-| Card year (mono) | `clamp(1.4rem, 3vw, 2rem)` | 500 | `-0.03em` | `1.0` |
-| Story lede | `clamp(1.15rem, 2.1vw, 1.5rem)` | 500 | `-0.015em` | `1.35` |
-| Body | `1rem` | 400 | normal | `1.65` |
-| Card description | `0.98rem` | 400 | normal | `1.55` |
-| Mono label | `0.66–0.68rem` | 500 | `0.16em` | — |
-| Status badge | `0.6rem` | 500 | `0.14em` | — |
+Every fluid step is a token in `:root`. Call sites reference the token; none of
+them writes a `clamp()` of its own.
 
-Rules of the scale: display type is uppercase, heavy, tight-tracked and set
-below 1.0 leading. Mono labels are the inverse — small, wide-tracked, muted.
-Nothing sits in between; that gap is what makes the hierarchy read.
+| Token | Min → Max | Used by |
+| --- | --- | --- |
+| `--text-display` | 3.4 → 12rem | Hero wordmark |
+| `--text-hero` | 2.2 → 5rem | Footer heading |
+| `--text-title` | 2.2 → 4.5rem | Modal title |
+| `--text-era` | 2 → 4rem | Era label |
+| `--text-h1` | 1.9 → 3.4rem | Story heading, orgs heading, blog index title |
+| `--text-h2` | 1.8 → 2.8rem | Blog post title |
+| `--text-h3` | 1.5 → 2.4rem | Card title, stat value |
+| `--text-h4` | 1.4 → 2rem | Card year (mono) |
+| `--text-lede` | 1.15 → 1.5rem | Story lede |
+| `--text-lede-sm` | 1 → 1.4rem | Hero tagline, modal lede |
+| `--text-caption` | 0.95 → 1.15rem | Footer email |
+| `--text-mega` | 4 → 8rem | Blog 404 |
+
+Fixed steps below the fluid range: body `1rem`, card description `0.98rem`,
+mono label `0.66–0.68rem`, status badge `0.6rem`. These are plain `rem`, so they
+already track the reader's setting.
+
+#### Why the preferred value is not pure `vw`
+
+The scale used to read `clamp(2rem, 5.5vw, 4rem)`. The problem is the middle
+term: at any width where `5.5vw` wins the clamp — which is most of the desktop
+range — the size is a pure function of the viewport, and a reader who sets their
+browser's base font to 20px sees **no change at all** in the headlines while the
+small print grows around them.
+
+Each step now interpolates linearly between 360px and 1440px, expressed so the
+preferred value carries a `rem` intercept:
+
+```
+clamp(min, <intercept>rem + <slope>vw, max)
+```
+
+Nothing sets `font-size` on `html`, so `rem` *is* the browser's font-size
+setting. Measured at 1280px, raising that setting from 16px to 20px now grows
+body copy 17.7%, card titles 13.3%, section headings 9–11%, the footer heading
+6.9%. Every one of those was 0% before.
+
+The cost is that the old scale reached its maximum at ~1280px and the new one
+reaches it at 1440px, so sizes between roughly 1024px and 1440px land 2–10%
+smaller than before. At 1440px and above they are identical, and the content
+shell caps at 1240px, so the change is invisible on a large display.
+
+#### The wordmark is the deliberate exception
+
+`.hero__name` is `min(var(--text-display), 18vw)`. It is set to fill its column,
+so on a narrow screen a 200% base font would push it past the viewport edge. It
+is decorative type rather than content, so it is capped against the viewport:
+the reader keeps their scale everywhere that carries meaning, and the page never
+scrolls sideways. The cap only binds below roughly 960px.
+
+Weights and metrics are unchanged: display type is uppercase, 700–800, tracked
+`-0.03em` to `-0.045em`, set below 1.0 leading. Mono labels are the inverse —
+small, wide-tracked, muted. Nothing sits in between; that gap is what makes the
+hierarchy read.
 
 Measure is capped at `--measure: 66ch` on every prose block.
 
@@ -215,21 +280,63 @@ on `[data-reveal]`, so nothing depends on animation to become visible.
 
 ## 7. Verified
 
-Checked against the running dev server:
+Checked against the running dev server.
 
-- Typecheck (`tsc -b --noEmit`) clean; lint clean for `src/` — the one remaining
-  lint error is pre-existing in `admin/src/hooks/useAutoSave.ts`, untouched here.
-- Both fonts resolve (`Inter`, `JetBrains Mono`), not fallbacks.
-- 3 eras, 12 project rows render.
-- Modal: opens on row click, focus lands inside, `body` scroll locks, closes via
-  close button / `cancel` / backdrop click, and scroll lock is released each time.
-- Contrast measured in both themes — table in §2.
-- 375×812: no horizontal overflow (`scrollWidth === clientWidth === 375`), all
-  grids collapse to one column.
+**Build gates** — typecheck (`tsc -b --noEmit`) clean, `bun run build` clean,
+lint clean for `src/`. The one remaining lint error is pre-existing in
+`admin/src/hooks/useAutoSave.ts`, untouched here.
 
-Not verified: full-page visual screenshots — the browser pane was hidden during
-the session, so the page could not paint. Layout was confirmed through computed
-geometry instead. **Worth an eyeball pass before deploying.**
+**Theme**
+
+| Case | Result |
+| --- | --- |
+| Clean storage, OS dark | Renders dark; nothing written to `localStorage` |
+| OS flipped light while open | Follows within the transition, no reload |
+| After clicking the toggle | `theme: 'dark'` stored; two further OS flips ignored |
+| Reload with a stored choice | Choice honoured, `--paper` correct before the transition |
+
+**Locale**
+
+| Case | Result |
+| --- | --- |
+| Clean storage, `navigator.languages` = `en-US, en-UY, es-UY` | `lang="en"`, nothing stored |
+| `languagechange` fired with `es-UY` first | Flips to `es` live, still nothing stored |
+| After clicking the toggle | `locale: 'es'` stored and pinned |
+
+**Type scale** — at 1280px, raising the base font from 16px to 20px grows body
+copy 17.7%, footer email 19.4%, card titles 13.3%, section headings 9–11%,
+footer heading 6.9%. Under the previous pure-`vw` scale every one of those was
+0%.
+
+**No horizontal overflow** at 320px and 375px, in both locales, with the base
+font at 16 / 20 / 24 / 32px (200%) — measured as `scrollWidth === clientWidth`
+plus a walk of every element for `scrollWidth > clientWidth`. The modal is clean
+at the same settings.
+
+Five layout bugs surfaced during that sweep and were fixed:
+
+| Bug | Fix |
+| --- | --- |
+| Hero tagline had no break opportunity (`Entrepreneur/Design/Programming` is one unbreakable run) so its min-content forced the page wider | `<wbr />` after each separator |
+| Mobile single-column grids used bare `1fr`, whose implicit `auto` minimum cannot shrink below min-content | `minmax(0, 1fr)` — 9 call sites, portfolio and blog |
+| Card head (year / status / org) and card CTA were non-wrapping flex rows | `flex-wrap: wrap` with a row gap |
+| Hero meta row (`PORTFOLIO` / `URUGUAY`) overflowed at 320px | `flex-wrap: wrap` |
+| Footer email is one long token that would not break | `overflow-wrap: anywhere`, `min-width: 0` on the column |
+
+A `overflow-wrap: break-word` floor on `body` catches any long word in display
+type that would otherwise widen the page. It only engages at large text-scale
+settings or very narrow screens.
+
+**Other** — both fonts resolve (`Inter`, `JetBrains Mono`), not fallbacks;
+3 eras and 13 project rows render; modal opens on row click, focus lands inside,
+`body` scroll locks and releases, closes via button / `cancel` / backdrop.
+Contrast measured in both themes, table in §2.
+
+**Visual confirmation is partial.** The browser pane was hidden for most of the
+session, so the page could not paint. Confirmed by screenshot: desktop light
+hero, mobile dark hero at 100% and 200% base font. Everything else was verified
+through computed geometry and the DOM. **Worth an eyeball pass on the timeline,
+orgs and footer before deploying.**
 
 ---
 
@@ -259,9 +366,16 @@ t(ui.modalVisit)(project.title) // → 'Visit Lux' / 'Ir a Lux'
 | `src/i18n/useLocale.ts` | The `useLocale()` hook, returning a bound `t()` |
 | `src/i18n/strings.ts` | Interface chrome — labels, buttons, aria text |
 
-Locale resolution order: `localStorage` → `navigator.languages` → `en`.
-The choice persists and sets `<html lang>`, which matters for screen readers and
-for search engines.
+Locale resolution order: an explicit choice in `localStorage` →
+`navigator.languages` → `en`. The resolved locale sets `<html lang>`, which
+matters for screen readers and for search engines.
+
+**Storage is written only on an explicit toggle.** The provider used to persist
+the locale inside a mount effect, which pinned whatever was detected on the very
+first visit and meant the site never tracked the browser again. It now keeps the
+reader's choice and the detected value as separate state, follows the browser
+until a choice exists, and listens for `languagechange` so a mid-session change
+takes effect without a reload.
 
 `t()` falls back to the default locale when a key is missing, so a half-translated
 entry renders English rather than blank.

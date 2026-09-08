@@ -39,6 +39,28 @@
   --gutter: 1.5rem;
   --measure: 66ch;
 
+  /* ─── Type scale ────────────────────────────────────────────────────────
+     Every fluid step interpolates between 360px and 1440px, and every
+     preferred value carries a `rem` term. That `rem` is what makes the scale
+     honour the reader's own base font size: a preferred value of pure `vw`
+     ignores it entirely at any width where it wins the clamp, so someone who
+     sets their browser to 20px would see the small print grow and the
+     headlines stay put. Nothing sets `font-size` on `html`, so `rem` is that
+     setting.
+     ───────────────────────────────────────────────────────────────────── */
+  --text-caption: clamp(0.95rem, 0.883rem + 0.3vw, 1.15rem);
+  --text-lede-sm: clamp(1rem, 0.867rem + 0.59vw, 1.4rem);
+  --text-lede: clamp(1.15rem, 1.033rem + 0.52vw, 1.5rem);
+  --text-h4: clamp(1.4rem, 1.2rem + 0.89vw, 2rem);
+  --text-h3: clamp(1.5rem, 1.2rem + 1.33vw, 2.4rem);
+  --text-h2: clamp(1.8rem, 1.467rem + 1.48vw, 2.8rem);
+  --text-h1: clamp(1.9rem, 1.4rem + 2.22vw, 3.4rem);
+  --text-era: clamp(2rem, 1.333rem + 2.96vw, 4rem);
+  --text-title: clamp(2.2rem, 1.433rem + 3.41vw, 4.5rem);
+  --text-hero: clamp(2.2rem, 1.267rem + 4.15vw, 5rem);
+  --text-display: clamp(3.4rem, 0.533rem + 12.74vw, 12rem);
+  --text-mega: clamp(4rem, 2.667rem + 5.93vw, 8rem);
+
   /* Legacy token names still consumed by the blog stylesheets. Re-pointed at
      flat Swiss values so those pages inherit the new system unchanged. */
   --bg-color: var(--paper);
@@ -105,6 +127,10 @@ body {
   min-width: 320px;
   background-color: var(--paper);
   color: var(--ink);
+  /* A long word in a headline must break rather than push the page sideways.
+     Only engages at large text-scale settings or very narrow screens, which is
+     exactly where horizontal scrolling would otherwise appear. */
+  overflow-wrap: break-word;
   transition: background-color 0.25s linear, color 0.25s linear;
 }
 

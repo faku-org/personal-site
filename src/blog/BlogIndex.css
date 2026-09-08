@@ -15,7 +15,7 @@
 }
 
 .blog-index__title {
-  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-size: var(--text-h1);
   font-weight: 700;
   letter-spacing: -0.03em;
   color: var(--text-dark);
@@ -262,7 +262,7 @@
   }
 
   .blog-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 

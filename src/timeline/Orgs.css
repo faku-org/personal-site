@@ -8,7 +8,7 @@
 }
 
 .orgs__heading {
-  font-size: clamp(1.9rem, 4.5vw, 3.4rem);
+  font-size: var(--text-h1);
   font-weight: 800;
   letter-spacing: -0.035em;
   line-height: 0.92;
@@ -82,7 +82,7 @@
 
 @media (max-width: 768px) {
   .orgs__intro {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     align-items: start;
   }
 

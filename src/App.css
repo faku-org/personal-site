@@ -16,14 +16,20 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
   padding-bottom: 1.25rem;
   border-bottom: var(--rule-hairline) solid var(--rule);
   margin-bottom: 2.5rem;
 }
 
 .hero__name {
-  font-size: clamp(3.4rem, 15vw, 12rem);
+  /* The wordmark is set to fill the column, so on a narrow screen a large base
+     font size would push it past the viewport. It is decorative type, not
+     content, so capping it against the viewport is the right trade: the reader
+     keeps their scale everywhere that carries meaning, and the page never
+     scrolls sideways. The cap only ever binds below ~960px. */
+  font-size: min(var(--text-display), 18vw);
   font-weight: 800;
   line-height: 0.82;
   letter-spacing: -0.045em;
@@ -40,7 +46,7 @@
 }
 
 .hero__tagline {
-  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-size: var(--text-lede-sm);
   font-weight: 500;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -94,7 +100,7 @@
 }
 
 .footer__heading {
-  font-size: clamp(2.2rem, 7vw, 5rem);
+  font-size: var(--text-hero);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 0.88;
@@ -116,11 +122,15 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 1.5rem;
+  min-width: 0;
 }
 
 .footer__email {
   display: inline-block;
-  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  max-width: 100%;
+  /* An address is one long token; let it break rather than widen the page. */
+  overflow-wrap: anywhere;
+  font-size: var(--text-caption);
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -235,7 +245,7 @@
   }
 
   .hero__foot {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     align-items: start;
     gap: 1.75rem;
   }
@@ -245,7 +255,7 @@
   }
 
   .footer {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     padding: 2.5rem 0;
   }
 

@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import { siteConfig, socialLinks } from './config'
 import { useLocale } from './i18n/useLocale'
+import { useTheme } from './useTheme'
 import { ui } from './i18n/strings'
 import {
   GitHubIcon,
@@ -31,24 +31,6 @@ const socials = socialLinks.map((s) => ({
   ...s,
   icon: iconMap[s.label] ?? (() => null),
 }))
-
-/* ─── Theme Hook ─── */
-
-function useTheme() {
-  const [dark, setDark] = useState(() => {
-    if (typeof window === 'undefined') return false
-    const stored = localStorage.getItem('theme')
-    if (stored) return stored === 'dark'
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
-  })
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
-    localStorage.setItem('theme', dark ? 'dark' : 'light')
-  }, [dark])
-
-  return [dark, () => setDark((d) => !d)] as const
-}
 
 /* ─── App ─── */
 
@@ -95,7 +77,15 @@ function HomePage() {
               .map((segment, i, arr) => (
                 <span key={segment}>
                   {segment.trim()}
-                  {i < arr.length - 1 && <span className="hero__tagline-sep">/</span>}
+                  {i < arr.length - 1 && (
+                    <>
+                      <span className="hero__tagline-sep">/</span>
+                      {/* The segments carry no whitespace, so without an explicit
+                          break opportunity the whole tagline is one unbreakable
+                          run and overflows once the reader scales the type up. */}
+                      <wbr />
+                    </>
+                  )}
                 </span>
               ))}
           </p>
