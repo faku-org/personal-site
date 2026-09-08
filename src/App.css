@@ -247,6 +247,211 @@
   left: -30px;
 }
 
+/* ─── Row 4 — JobIt (7) + LearnIt (5) ─── */
+.project-card--jobit {
+  grid-column: 1 / 8;
+  grid-row: 4;
+  background: linear-gradient(145deg, rgba(0, 28, 48, 0.85), rgba(23, 107, 135, 0.4));
+  color: #DAFFFB;
+}
+
+.project-card--jobit::after {
+  width: 210px;
+  height: 210px;
+  background: var(--primary);
+  top: -60px;
+  right: -40px;
+}
+
+.project-card--learnit {
+  grid-column: 8 / 13;
+  grid-row: 4;
+  background: linear-gradient(145deg, rgba(13, 96, 128, 0.7), rgba(100, 204, 197, 0.25));
+  color: #DAFFFB;
+}
+
+.project-card--learnit::after {
+  width: 180px;
+  height: 180px;
+  background: var(--accent);
+  bottom: -50px;
+  left: -30px;
+}
+
+/* ─── Row 5 — SearchIt (5) + MindVault (7) ─── */
+.project-card--searchit {
+  grid-column: 1 / 6;
+  grid-row: 5;
+  background: linear-gradient(145deg, rgba(100, 204, 197, 0.35), rgba(23, 107, 135, 0.45));
+  color: var(--bg-deep);
+}
+
+[data-theme='dark'] .project-card--searchit {
+  color: #DAFFFB;
+  background: linear-gradient(145deg, rgba(100, 204, 197, 0.18), rgba(23, 107, 135, 0.2));
+}
+
+.project-card--searchit::after {
+  width: 160px;
+  height: 160px;
+  background: var(--primary);
+  top: -40px;
+  right: -40px;
+}
+
+.project-card--mindvault {
+  grid-column: 6 / 13;
+  grid-row: 5;
+  background: linear-gradient(145deg, rgba(23, 107, 135, 0.7), rgba(0, 28, 48, 0.55));
+  color: #DAFFFB;
+}
+
+.project-card--mindvault::after {
+  width: 240px;
+  height: 240px;
+  background: var(--accent);
+  bottom: -70px;
+  right: 8%;
+}
+
+/* ─── Row 6 — OhMy (7) + Cipher (5) ─── */
+.project-card--ohmy {
+  grid-column: 1 / 8;
+  grid-row: 6;
+  background: linear-gradient(145deg, rgba(0, 28, 48, 0.85), rgba(10, 158, 153, 0.3));
+  color: #DAFFFB;
+}
+
+.project-card--ohmy::after {
+  width: 230px;
+  height: 230px;
+  background: var(--primary);
+  bottom: -60px;
+  right: -30px;
+}
+
+.project-card--cipher {
+  grid-column: 8 / 13;
+  grid-row: 6;
+  background: linear-gradient(145deg, rgba(13, 96, 128, 0.65), rgba(10, 158, 153, 0.35));
+  color: #DAFFFB;
+}
+
+.project-card--cipher::after {
+  width: 170px;
+  height: 170px;
+  background: var(--accent);
+  top: -45px;
+  left: -25px;
+}
+
+/* ─── Row 7 — OhMy tools (4 × 3 cols, compact) ─── */
+.project-card--ohmydocs,
+.project-card--ohmymail,
+.project-card--ohmygrid,
+.project-card--ohmyforms,
+.project-card--ohmycharts,
+.project-card--ohmydiagrams,
+.project-card--ohmygantt {
+  min-height: 230px;
+  padding: 1.75rem 1.5rem;
+  background: linear-gradient(145deg, rgba(0, 28, 48, 0.75), rgba(13, 96, 128, 0.35));
+  color: #DAFFFB;
+}
+
+.project-card--ohmydocs .project-card__title,
+.project-card--ohmymail .project-card__title,
+.project-card--ohmygrid .project-card__title,
+.project-card--ohmyforms .project-card__title,
+.project-card--ohmycharts .project-card__title,
+.project-card--ohmydiagrams .project-card__title,
+.project-card--ohmygantt .project-card__title {
+  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+}
+
+.project-card--ohmydocs .project-card__desc,
+.project-card--ohmymail .project-card__desc,
+.project-card--ohmygrid .project-card__desc,
+.project-card--ohmyforms .project-card__desc,
+.project-card--ohmycharts .project-card__desc,
+.project-card--ohmydiagrams .project-card__desc,
+.project-card--ohmygantt .project-card__desc {
+  font-size: 0.85rem;
+  max-width: none;
+}
+
+.project-card--ohmydocs {
+  grid-column: 1 / 4;
+  grid-row: 7;
+}
+
+.project-card--ohmymail {
+  grid-column: 4 / 7;
+  grid-row: 7;
+}
+
+.project-card--ohmygrid {
+  grid-column: 7 / 10;
+  grid-row: 7;
+}
+
+.project-card--ohmyforms {
+  grid-column: 10 / 13;
+  grid-row: 7;
+}
+
+/* Row 8 — remaining OhMy tools: Charts (3) + Diagrams (3) + Gantt (6) */
+.project-card--ohmycharts {
+  grid-column: 1 / 4;
+  grid-row: 8;
+}
+
+.project-card--ohmydiagrams {
+  grid-column: 4 / 7;
+  grid-row: 8;
+}
+
+.project-card--ohmygantt {
+  grid-column: 7 / 13;
+  grid-row: 8;
+  background: linear-gradient(145deg, rgba(0, 28, 48, 0.85), rgba(23, 107, 135, 0.45));
+}
+
+.project-card--ohmydocs::after,
+.project-card--ohmymail::after,
+.project-card--ohmygrid::after,
+.project-card--ohmyforms::after {
+  width: 130px;
+  height: 130px;
+  background: var(--primary);
+  bottom: -40px;
+  right: -30px;
+}
+
+.project-card--ohmycharts::after {
+  width: 130px;
+  height: 130px;
+  background: var(--accent);
+  top: -40px;
+  right: -30px;
+}
+
+.project-card--ohmydiagrams::after {
+  width: 130px;
+  height: 130px;
+  background: var(--primary);
+  bottom: -40px;
+  left: -30px;
+}
+
+.project-card--ohmygantt::after {
+  width: 190px;
+  height: 190px;
+  background: var(--accent);
+  top: -60px;
+  right: 6%;
+}
+
 .project-card__title {
   font-size: clamp(1.6rem, 3vw, 2.4rem);
   font-weight: 700;
@@ -470,7 +675,20 @@
   .project-card--talentum,
   .project-card--adastra,
   .project-card--lux,
-  .project-card--libraria {
+  .project-card--libraria,
+  .project-card--jobit,
+  .project-card--learnit,
+  .project-card--searchit,
+  .project-card--mindvault,
+  .project-card--cipher,
+  .project-card--ohmy,
+  .project-card--ohmydocs,
+  .project-card--ohmymail,
+  .project-card--ohmygrid,
+  .project-card--ohmyforms,
+  .project-card--ohmycharts,
+  .project-card--ohmydiagrams,
+  .project-card--ohmygantt {
     grid-column: 1 / -1;
     grid-row: auto;
   }
