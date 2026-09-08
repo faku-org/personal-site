@@ -27,10 +27,7 @@ export const socialLinks = [
 
 // ─── Project Cards ───
 // Each card appears in the Bauhaus-style grid. The `modifier` controls which
-// CSS style variant is applied:
-//   • 'wefaber'  → dark teal card, spans 7 columns
-//   • 'talentum' → peach card, spans 5 columns
-//   • 'adastra'  → teal wide card, spans full width
+// CSS style variant is applied (see App.css for grid position & tone).
 
 export const projects = [
   {
@@ -60,5 +57,61 @@ export const projects = [
     description:
       'A FiveM roleplay server — immersive world, storytelling made by humans.',
     modifier: 'adastra',
+  },
+  {
+    title: 'Lux',
+    url: 'https://lux.eternum.lat',
+    description:
+      'SGRSI — IT resource & service management system for UTU. Equipment, tickets, loans and service requests across four roles. Live demo on mock data.',
+    modifier: 'lux',
+  },
+  {
+    title: 'Libraria',
+    url: 'https://libraria.wefaber.net',
+    description:
+      'A visual component builder with a generic design-token theme engine. Proof of concept.',
+    modifier: 'libraria',
+  },
+  {
+    title: 'JobIt',
+    url: 'https://jobs.wefaber.net',
+    description:
+      "Uruguay's job board — every field, every level, filtered by no-experience roles. Bun + Elysia + React 19.",
+    modifier: 'jobit',
+  },
+  {
+    title: 'LearnIt',
+    url: 'https://github.com/faku-org/learnit',
+    description:
+      'Language learning app — lessons that stick. Built with Astro, React 19 and Elysia.',
+    modifier: 'learnit',
+  },
+  {
+    title: 'SearchIt',
+    url: 'https://github.com/faku-org/searchit',
+    description:
+      "Desktop app (Tauri) that turns a photographer's raw photo dump into a searchable archive — faces, GPS, OCR and CLIP.",
+    modifier: 'searchit',
+  },
+  {
+    title: 'MindVault',
+    url: 'https://github.com/faku-org/mindvault',
+    description:
+      'Knowledge externalization with dynamic graphs — typed memories, append-only versioning, co-evolving with AI agents.',
+    modifier: 'mindvault',
+  },
+  {
+    title: 'Cipher',
+    url: 'https://github.com/faku-org/cipher',
+    description:
+      'End-to-end encrypted messaging and file sharing. Zero data. Proof of concept.',
+    modifier: 'cipher',
+  },
+  {
+    title: 'OhMy',
+    url: 'https://ohmy.lat',
+    description:
+      'The OhMy suite — small, focused browser-only tools. Documents, mail, grids, forms, charts, diagrams and gantt.',
+    modifier: 'ohmy',
   },
 ] as const

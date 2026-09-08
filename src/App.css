@@ -209,6 +209,142 @@
   right: 10%;
 }
 
+/* Card 5 — row 3, spans 7 cols */
+.project-card--lux {
+  grid-column: 1 / 8;
+  grid-row: 3;
+  background: linear-gradient(145deg, rgba(0, 28, 48, 0.85), rgba(10, 158, 153, 0.28));
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(100, 204, 197, 0.3);
+  color: #DAFFFB;
+}
+
+.project-card--lux::after {
+  width: 200px;
+  height: 200px;
+  background: var(--primary);
+  bottom: -60px;
+  right: -30px;
+}
+
+/* Card 6 — row 3, spans 5 cols */
+.project-card--libraria {
+  grid-column: 8 / 13;
+  grid-row: 3;
+  background: linear-gradient(145deg, rgba(23, 107, 135, 0.55), rgba(10, 158, 153, 0.3));
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(100, 204, 197, 0.4);
+  color: #DAFFFB;
+}
+
+.project-card--libraria::after {
+  width: 170px;
+  height: 170px;
+  background: var(--accent);
+  top: -50px;
+  left: -30px;
+}
+
+/* ─── Row 4 — JobIt (7) + LearnIt (5) ─── */
+.project-card--jobit {
+  grid-column: 1 / 8;
+  grid-row: 4;
+  background: linear-gradient(145deg, rgba(0, 28, 48, 0.85), rgba(23, 107, 135, 0.4));
+  color: #DAFFFB;
+}
+
+.project-card--jobit::after {
+  width: 210px;
+  height: 210px;
+  background: var(--primary);
+  top: -60px;
+  right: -40px;
+}
+
+.project-card--learnit {
+  grid-column: 8 / 13;
+  grid-row: 4;
+  background: linear-gradient(145deg, rgba(13, 96, 128, 0.7), rgba(100, 204, 197, 0.25));
+  color: #DAFFFB;
+}
+
+.project-card--learnit::after {
+  width: 180px;
+  height: 180px;
+  background: var(--accent);
+  bottom: -50px;
+  left: -30px;
+}
+
+/* ─── Row 5 — SearchIt (5) + MindVault (7) ─── */
+.project-card--searchit {
+  grid-column: 1 / 6;
+  grid-row: 5;
+  background: linear-gradient(145deg, rgba(100, 204, 197, 0.35), rgba(23, 107, 135, 0.45));
+  color: var(--bg-deep);
+}
+
+[data-theme='dark'] .project-card--searchit {
+  color: #DAFFFB;
+  background: linear-gradient(145deg, rgba(100, 204, 197, 0.18), rgba(23, 107, 135, 0.2));
+}
+
+.project-card--searchit::after {
+  width: 160px;
+  height: 160px;
+  background: var(--primary);
+  top: -40px;
+  right: -40px;
+}
+
+.project-card--mindvault {
+  grid-column: 6 / 13;
+  grid-row: 5;
+  background: linear-gradient(145deg, rgba(23, 107, 135, 0.7), rgba(0, 28, 48, 0.55));
+  color: #DAFFFB;
+}
+
+.project-card--mindvault::after {
+  width: 240px;
+  height: 240px;
+  background: var(--accent);
+  bottom: -70px;
+  right: 8%;
+}
+
+/* ─── Row 6 — OhMy (7) + Cipher (5) ─── */
+.project-card--ohmy {
+  grid-column: 1 / 8;
+  grid-row: 6;
+  background: linear-gradient(145deg, rgba(0, 28, 48, 0.85), rgba(10, 158, 153, 0.3));
+  color: #DAFFFB;
+}
+
+.project-card--ohmy::after {
+  width: 230px;
+  height: 230px;
+  background: var(--primary);
+  bottom: -60px;
+  right: -30px;
+}
+
+.project-card--cipher {
+  grid-column: 8 / 13;
+  grid-row: 6;
+  background: linear-gradient(145deg, rgba(13, 96, 128, 0.65), rgba(10, 158, 153, 0.35));
+  color: #DAFFFB;
+}
+
+.project-card--cipher::after {
+  width: 170px;
+  height: 170px;
+  background: var(--accent);
+  top: -45px;
+  left: -25px;
+}
+
 .project-card__title {
   font-size: clamp(1.6rem, 3vw, 2.4rem);
   font-weight: 700;
@@ -430,7 +566,15 @@
   .project-card--wefaber,
   .project-card--eternum,
   .project-card--talentum,
-  .project-card--adastra {
+  .project-card--adastra,
+  .project-card--lux,
+  .project-card--libraria,
+  .project-card--jobit,
+  .project-card--learnit,
+  .project-card--searchit,
+  .project-card--mindvault,
+  .project-card--cipher,
+  .project-card--ohmy {
     grid-column: 1 / -1;
     grid-row: auto;
   }
