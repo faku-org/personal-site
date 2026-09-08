@@ -345,113 +345,6 @@
   left: -25px;
 }
 
-/* ─── Row 7 — OhMy tools (4 × 3 cols, compact) ─── */
-.project-card--ohmydocs,
-.project-card--ohmymail,
-.project-card--ohmygrid,
-.project-card--ohmyforms,
-.project-card--ohmycharts,
-.project-card--ohmydiagrams,
-.project-card--ohmygantt {
-  min-height: 230px;
-  padding: 1.75rem 1.5rem;
-  background: linear-gradient(145deg, rgba(0, 28, 48, 0.75), rgba(13, 96, 128, 0.35));
-  color: #DAFFFB;
-}
-
-.project-card--ohmydocs .project-card__title,
-.project-card--ohmymail .project-card__title,
-.project-card--ohmygrid .project-card__title,
-.project-card--ohmyforms .project-card__title,
-.project-card--ohmycharts .project-card__title,
-.project-card--ohmydiagrams .project-card__title,
-.project-card--ohmygantt .project-card__title {
-  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
-}
-
-.project-card--ohmydocs .project-card__desc,
-.project-card--ohmymail .project-card__desc,
-.project-card--ohmygrid .project-card__desc,
-.project-card--ohmyforms .project-card__desc,
-.project-card--ohmycharts .project-card__desc,
-.project-card--ohmydiagrams .project-card__desc,
-.project-card--ohmygantt .project-card__desc {
-  font-size: 0.85rem;
-  max-width: none;
-}
-
-.project-card--ohmydocs {
-  grid-column: 1 / 4;
-  grid-row: 7;
-}
-
-.project-card--ohmymail {
-  grid-column: 4 / 7;
-  grid-row: 7;
-}
-
-.project-card--ohmygrid {
-  grid-column: 7 / 10;
-  grid-row: 7;
-}
-
-.project-card--ohmyforms {
-  grid-column: 10 / 13;
-  grid-row: 7;
-}
-
-/* Row 8 — remaining OhMy tools: Charts (3) + Diagrams (3) + Gantt (6) */
-.project-card--ohmycharts {
-  grid-column: 1 / 4;
-  grid-row: 8;
-}
-
-.project-card--ohmydiagrams {
-  grid-column: 4 / 7;
-  grid-row: 8;
-}
-
-.project-card--ohmygantt {
-  grid-column: 7 / 13;
-  grid-row: 8;
-  background: linear-gradient(145deg, rgba(0, 28, 48, 0.85), rgba(23, 107, 135, 0.45));
-}
-
-.project-card--ohmydocs::after,
-.project-card--ohmymail::after,
-.project-card--ohmygrid::after,
-.project-card--ohmyforms::after {
-  width: 130px;
-  height: 130px;
-  background: var(--primary);
-  bottom: -40px;
-  right: -30px;
-}
-
-.project-card--ohmycharts::after {
-  width: 130px;
-  height: 130px;
-  background: var(--accent);
-  top: -40px;
-  right: -30px;
-}
-
-.project-card--ohmydiagrams::after {
-  width: 130px;
-  height: 130px;
-  background: var(--primary);
-  bottom: -40px;
-  left: -30px;
-}
-
-.project-card--ohmygantt::after {
-  width: 190px;
-  height: 190px;
-  background: var(--accent);
-  top: -60px;
-  right: 6%;
-}
-
 .project-card__title {
   font-size: clamp(1.6rem, 3vw, 2.4rem);
   font-weight: 700;
@@ -681,14 +574,7 @@
   .project-card--searchit,
   .project-card--mindvault,
   .project-card--cipher,
-  .project-card--ohmy,
-  .project-card--ohmydocs,
-  .project-card--ohmymail,
-  .project-card--ohmygrid,
-  .project-card--ohmyforms,
-  .project-card--ohmycharts,
-  .project-card--ohmydiagrams,
-  .project-card--ohmygantt {
+  .project-card--ohmy {
     grid-column: 1 / -1;
     grid-row: auto;
   }
