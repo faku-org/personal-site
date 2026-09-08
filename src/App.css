@@ -209,6 +209,44 @@
   right: 10%;
 }
 
+/* Card 5 — row 3, spans 7 cols */
+.project-card--lux {
+  grid-column: 1 / 8;
+  grid-row: 3;
+  background: linear-gradient(145deg, rgba(0, 28, 48, 0.85), rgba(10, 158, 153, 0.28));
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(100, 204, 197, 0.3);
+  color: #DAFFFB;
+}
+
+.project-card--lux::after {
+  width: 200px;
+  height: 200px;
+  background: var(--primary);
+  bottom: -60px;
+  right: -30px;
+}
+
+/* Card 6 — row 3, spans 5 cols */
+.project-card--libraria {
+  grid-column: 8 / 13;
+  grid-row: 3;
+  background: linear-gradient(145deg, rgba(23, 107, 135, 0.55), rgba(10, 158, 153, 0.3));
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(100, 204, 197, 0.4);
+  color: #DAFFFB;
+}
+
+.project-card--libraria::after {
+  width: 170px;
+  height: 170px;
+  background: var(--accent);
+  top: -50px;
+  left: -30px;
+}
+
 .project-card__title {
   font-size: clamp(1.6rem, 3vw, 2.4rem);
   font-weight: 700;
@@ -430,7 +468,9 @@
   .project-card--wefaber,
   .project-card--eternum,
   .project-card--talentum,
-  .project-card--adastra {
+  .project-card--adastra,
+  .project-card--lux,
+  .project-card--libraria {
     grid-column: 1 / -1;
     grid-row: auto;
   }

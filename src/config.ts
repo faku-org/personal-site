@@ -61,4 +61,18 @@ export const projects = [
       'A FiveM roleplay server — immersive world, storytelling made by humans.',
     modifier: 'adastra',
   },
+  {
+    title: 'Lux',
+    url: 'https://lux.eternum.lat',
+    description:
+      'SGRSI — IT resource & service management system for UTU. Equipment, tickets, loans and service requests across four roles. Live demo on mock data.',
+    modifier: 'lux',
+  },
+  {
+    title: 'Libraria',
+    url: 'https://libraria.wefaber.net',
+    description:
+      'A visual component builder with a generic design-token theme engine. Proof of concept.',
+    modifier: 'libraria',
+  },
 ] as const
