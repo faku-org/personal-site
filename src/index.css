@@ -1,33 +1,66 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+/* Fonts are loaded via <link> in index.html — preconnected, so they start
+   downloading before this stylesheet is parsed. */
 
-/* ─── Design Tokens ─── */
+/* ─── Design Tokens — International Typographic Style ─────────────────────
+   Flat surfaces, hairline rules, one accent. No gradients, blur, shadow or
+   radius anywhere: if a value below is not a colour, a length or a font, it
+   does not belong in this system.
+   ───────────────────────────────────────────────────────────────────────── */
 :root {
-  --bg-color: #EDF7F6;
-  --bg-deep: #001C30;
-  --accent: #078F87;
-  --primary: #0B5A7A;
-  --text-dark: #04212F;
-  --card-shadow: rgba(4, 33, 47, 0.12);
+  /* ─── Palette ───────────────────────────────────────────────────────────
+     Black ink, near-white paper, blue as the single accent. Seeded from
+     #E3F2FD / #90CAF9 / #2196F3 / #0D47A1, with darker steps of the same
+     blue where the base tone does not clear 4.5:1 against the paper.
+     ───────────────────────────────────────────────────────────────────── */
 
-  /* Glass tokens */
-  --glass-bg: rgba(255, 255, 255, 0.55);
-  --glass-border: rgba(7, 143, 135, 0.25);
-  --glass-blur: 18px;
-  --glass-highlight: rgba(255, 255, 255, 0.65);
+  /* Surface & ink */
+  --paper: #F7FAFD;
+  --paper-raised: #E3F2FD;   /* the light blue, used as the hover tint */
+  --ink: #0A0F14;            /* near-black */
+  --ink-muted: #5A646E;      /* 5.7:1 on paper */
 
-  /* Grid background */
-  --grid-color: rgba(11, 90, 122, 0.07);
-  --grid-size: 60px;
+  /* Accent — #2196F3 for graphics only (2.7:1 as text on paper).
+     Text and fills step down to #1565C0, which clears 5.0:1. */
+  --accent: #2196F3;
+  --accent-text: #1565C0;
+  --accent-fill: #1565C0;
+  --accent-fill-ink: #FFFFFF;
 
-  --font-stack: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: 'IBM Plex Serif', 'Georgia', serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  /* Rules — the whole layout is built from these */
+  --rule: rgba(10, 15, 20, 0.16);
+  --rule-soft: #90CAF9;
+  --rule-strong: #0A0F14;
+  --rule-hairline: 1px;
+  --rule-heavy: 3px;
+
+  --backdrop: rgba(10, 15, 20, 0.86);
+
+  /* Grid */
+  --gutter: 1.5rem;
+  --measure: 66ch;
+
+  /* Legacy token names still consumed by the blog stylesheets. Re-pointed at
+     flat Swiss values so those pages inherit the new system unchanged. */
+  --bg-color: var(--paper);
+  --bg-deep: var(--ink);
+  --primary: var(--ink-muted);
+  --text-dark: var(--ink);
+  --card-shadow: transparent;
+  --glass-bg: var(--paper-raised);
+  --glass-border: var(--rule);
+  --glass-blur: 0px;
+  --glass-highlight: transparent;
+
+  --font-stack: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-serif: var(--font-stack);
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
 
   font-family: var(--font-stack);
-  line-height: 1.6;
+  font-optical-sizing: auto;
+  line-height: 1.5;
   font-weight: 400;
-  color: var(--text-dark);
-  background-color: var(--bg-color);
+  color: var(--ink);
+  background-color: var(--paper);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -37,19 +70,23 @@
   color-scheme: light;
 }
 
-/* ─── Dark Theme ─── */
+/* ─── Dark: black paper, the blues brighten to carry the contrast ─── */
 [data-theme='dark'] {
-  --bg-color: #001C30;
-  --bg-deep: #000E18;
-  --accent: #64CCC5;
-  --primary: #64CCC5;
-  --text-dark: #DAFFFB;
-  --card-shadow: rgba(0, 0, 0, 0.5);
+  --paper: #0A0F14;
+  --paper-raised: #141C24;
+  --ink: #E3F2FD;
+  --ink-muted: #90A0B0;
 
-  --glass-bg: rgba(0, 28, 48, 0.55);
-  --glass-border: rgba(100, 204, 197, 0.2);
-  --glass-highlight: rgba(100, 204, 197, 0.08);
-  --grid-color: rgba(100, 204, 197, 0.06);
+  --accent: #2196F3;
+  --accent-text: #90CAF9;    /* 11:1 on the black paper */
+  --accent-fill: #2196F3;
+  --accent-fill-ink: #0A0F14;
+
+  --rule: rgba(227, 242, 253, 0.22);
+  --rule-soft: rgba(144, 202, 249, 0.4);
+  --rule-strong: #E3F2FD;
+
+  --backdrop: rgba(5, 8, 11, 0.9);
 
   color-scheme: dark;
 }
@@ -66,44 +103,21 @@ body {
   margin: 0;
   min-height: 100vh;
   min-width: 320px;
-  background-color: var(--bg-color);
-  transition: background-color 0.5s ease, color 0.5s ease;
-
-  /* Grid background */
-  background-image:
-    linear-gradient(var(--grid-color) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-  background-size: var(--grid-size) var(--grid-size);
-  background-attachment: fixed;
+  background-color: var(--paper);
+  color: var(--ink);
+  transition: background-color 0.25s linear, color 0.25s linear;
 }
 
-/* Ambient glow blobs */
-body::before,
-body::after {
-  content: '';
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.4;
-  pointer-events: none;
-  z-index: -1;
-  transition: opacity 0.5s ease;
-}
+/* ─── Typographic primitives ─── */
 
-body::before {
-  width: 600px;
-  height: 600px;
-  background: var(--accent);
-  top: -10%;
-  left: -10%;
-}
-
-body::after {
-  width: 500px;
-  height: 500px;
-  background: var(--primary);
-  bottom: -10%;
-  right: -10%;
+/* Uppercase mono label — the workhorse of the system */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
 }
 
 a {
@@ -111,7 +125,32 @@ a {
   text-decoration: none;
 }
 
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 3px;
+}
+
 ::selection {
-  background-color: var(--accent);
-  color: var(--bg-deep);
+  background-color: var(--accent-fill);
+  color: var(--accent-fill-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -1,0 +1,339 @@
+/* ─── Project Modal ──────────────────────────────────────────────────────
+   Native <dialog>: `showModal()` supplies the focus trap, Esc and inert
+   background. The dialog itself is the full-viewport click target; the sheet
+   is the paper sitting on it.
+   ──────────────────────────────────────────────────────────────────────── */
+
+.modal {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  padding: var(--gutter);
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.modal:not([open]) {
+  display: none;
+}
+
+.modal[open] {
+  display: grid;
+  place-items: start center;
+}
+
+/* `::backdrop` does not inherit custom properties in every engine, so the
+   literal fallback carries browsers where `var(--backdrop)` is unresolved. */
+.modal::backdrop {
+  background: var(--backdrop, rgba(10, 15, 20, 0.86));
+}
+
+[data-theme='dark'] .modal::backdrop {
+  background: var(--backdrop, rgba(5, 8, 11, 0.9));
+}
+
+/* ─── Sheet ─── */
+.modal__sheet {
+  position: relative;
+  width: min(100%, 900px);
+  margin: auto 0;
+  padding: 3rem clamp(1.25rem, 4vw, 3.5rem) 3rem;
+  background: var(--paper);
+  border-top: 6px solid var(--accent);
+}
+
+/* Enter transition (progressively enhanced — no-op where unsupported) */
+@media (prefers-reduced-motion: no-preference) {
+  .modal__sheet {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  @starting-style {
+    .modal[open] .modal__sheet {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+  }
+}
+
+/* ─── Close ─── */
+.modal__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  border-left: var(--rule-hairline) solid var(--rule);
+  border-bottom: var(--rule-hairline) solid var(--rule);
+  transition: background-color 0.15s linear, color 0.15s linear;
+}
+
+.modal__close:hover {
+  background: var(--accent-fill);
+  color: var(--accent-fill-ink);
+}
+
+.modal__close svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ─── Head ─── */
+.modal__head {
+  padding-bottom: 2rem;
+  border-bottom: var(--rule-heavy) solid var(--rule-strong);
+}
+
+.modal__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  margin-bottom: 1.25rem;
+}
+
+.modal__sep {
+  width: 20px;
+  height: var(--rule-hairline);
+  background: currentColor;
+}
+
+.modal__title {
+  font-size: clamp(2.2rem, 7vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.88;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.modal__lede {
+  margin-top: 1.25rem;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  max-width: var(--measure);
+}
+
+/* ─── Meta rows ─── */
+.modal__meta {
+  border-bottom: var(--rule-hairline) solid var(--rule);
+}
+
+.modal__meta-row {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  gap: var(--gutter);
+  padding: 0.9rem 0;
+  border-bottom: var(--rule-hairline) solid var(--rule);
+}
+
+.modal__meta-row:last-child {
+  border-bottom: none;
+}
+
+.modal__meta-row dt {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.modal__meta-row dd {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+/* ─── Sections ─── */
+.modal__section {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  gap: 1rem var(--gutter);
+  padding: 2.5rem 0;
+  border-bottom: var(--rule-hairline) solid var(--rule);
+}
+
+.modal__section-title {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.modal__prose {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--ink);
+  max-width: var(--measure);
+}
+
+/* ─── Evolution / milestones ─── */
+.modal__milestones {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__milestone {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.25rem;
+  padding: 1.25rem 0;
+  border-top: var(--rule-hairline) solid var(--rule);
+}
+
+.modal__milestone:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.modal__milestone-index {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--accent-text);
+  padding-top: 0.2rem;
+}
+
+.modal__milestone-when {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 0.35rem;
+}
+
+.modal__milestone-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.modal__milestone-detail {
+  margin-top: 0.4rem;
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+  max-width: var(--measure);
+}
+
+/* ─── Footer ─── */
+.modal__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 2rem;
+}
+
+.modal__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1.6rem;
+  background: var(--accent-fill);
+  color: var(--accent-fill-ink);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: opacity 0.15s linear;
+}
+
+.modal__cta:hover {
+  opacity: 0.85;
+}
+
+.modal__cta svg {
+  width: 14px;
+  height: 14px;
+}
+
+.modal__link {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding-bottom: 0.25rem;
+  border-bottom: var(--rule-hairline) solid var(--rule-strong);
+  transition: color 0.15s linear, border-color 0.15s linear;
+}
+
+.modal__link:hover {
+  color: var(--accent-text);
+  border-color: var(--accent-text);
+}
+
+@media (max-width: 768px) {
+  .modal {
+    padding: 0;
+  }
+
+  .modal__sheet {
+    padding: 2.5rem 1.25rem 2.5rem;
+  }
+
+  .modal__section,
+  .modal__meta-row {
+    grid-template-columns: 1fr;
+  }
+
+  .modal__milestone {
+    gap: 0.9rem;
+  }
+}
+
+/* ─── Tags ─── */
+.modal__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.modal__tag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  padding: 0.25rem 0.5rem;
+  border: var(--rule-hairline) solid var(--rule);
+}
+
+.modal__org {
+  color: var(--accent-text);
+  border-bottom: var(--rule-hairline) solid var(--accent-text);
+  padding-bottom: 0.1rem;
+}

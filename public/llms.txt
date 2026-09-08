@@ -1,0 +1,79 @@
+# Facundo Presa
+
+> Entrepreneur, designer and developer based in Uruguay. Started programming at
+> 14 to build a FiveM roleplay server. Founder of WeFaber (a software and applied
+> AI studio), Eternum (student productivity software), Talentum (talent
+> management) and Novum (geopolitical Minecraft). Builds products end to end —
+> mostly Bun, TypeScript, React 19, and local-first or browser-only tooling.
+
+This site is a portfolio organised as a chronological timeline: a background
+section, then every project grouped into eras, each with a long-form story and
+its evolution over time. Available in English and Spanish.
+
+## Contact
+
+- Email: hola@facupresa.com
+- GitHub: https://github.com/fakuuy
+- LinkedIn: https://linkedin.com/in/fakup
+- X: https://x.com/faku_sys
+
+## Orgs
+
+- **fakuuy** (https://github.com/fakuuy): Personal profile — UTU coursework and
+  side quests.
+- **faku-org** (https://github.com/faku-org): Personal projects tied to his
+  ideology, where ideas start before their sector is clear.
+- **WeFaber** (https://wefaber.net): Enterprise-class and incubator-facing work.
+- **Eternum** (https://eternum.lat): Class team building student productivity
+  software. Lux and OhMy come from here.
+- **Talentum** (https://talentum.live): Talent management for creators and
+  public speakers.
+- **Novum** (https://github.com/novum-org): Geopolitical Minecraft.
+- **Ad Astra** (https://github.com/adastra-org): Where it began.
+
+## Projects
+
+- [WeFaber](https://wefaber.net): Software and applied AI studio from Uruguay.
+  Started as Itica in 2025, rebranded in 2026.
+- [Eternum](https://eternum.lat): Class team building productivity software for
+  students, aiming to be a local reference in Uruguay — tools, resources, papers
+  and books. Lux is its product; OhMy grew out of the same goal.
+- [Lux](https://lux.eternum.lat): SGRSI — IT resource and service management for
+  UTU. Equipment, tickets, loans and service requests across four roles
+  (Super Admin, Administrator, Technician, Requester). Bun, React 19,
+  TailwindCSS v4, Radix UI, with an MSW mock layer powering the public demo.
+- [JobIt](https://jobs.wefaber.net): Uruguayan job board covering every field,
+  built for people looking for their first job. Filters by field, department and
+  schedule, a no-experience flag, saved and discarded listings, and state
+  listings from Uruguay Concursa. Bun + Elysia API, React 19 front end, scrapers
+  writing a JSON feed.
+- [OhMy](https://ohmy.lat): Eternum's tool suite — small browser-only apps for
+  mail, docs, grids, forms, charts, gantt and diagrams. No account, no
+  server-side data. The diagram editor does UML 2.5 use-case diagrams with a
+  live validation checklist.
+- [LearnIt](https://github.com/faku-org/learnit): AI-powered language learning.
+  LLM-generated learning paths, SM-2 spaced repetition, adaptive difficulty and
+  a calibration flow. Astro, React 19, Elysia, MongoDB, Deepseek.
+- [SearchIt](https://github.com/faku-org/searchit): Tauri desktop app that turns
+  a photographer's raw photo dump into a searchable archive — faces, GPS, OCR
+  and CLIP embeddings, indexed entirely on-device.
+- [MindVault](https://github.com/faku-org/mindvault): Knowledge externalization
+  with dynamic graphs — typed memories, append-only versioning, co-evolving with
+  AI agents.
+- [Cipher](https://github.com/faku-org/cipher): End-to-end encrypted messaging
+  and file sharing with zero data retention. Proof of concept.
+- [Talentum](https://talentum.live): Talent management — resources, information
+  and content for content creators and anyone who goes public, speakers and
+  presenters included.
+- [Ad Astra](https://adastrarp.com): FiveM roleplay server with an immersive
+  world and human-written storytelling. The first project, built at 14.
+- [Novum](https://github.com/novum-org): A Minecraft world built on geopolitics —
+  territory escalating from camps to nations and blocs, with invasions, wars, a
+  power balance, an economy with its own currencies, and an RPG layer of skills,
+  quests, clans and reputation.
+- [Libraria](https://libraria.wefaber.net): Visual component builder with a theme
+  engine — manual-first, AI-assisted.
+
+## Optional
+
+- [Blog](https://facupresa.com/blog): Writing.
