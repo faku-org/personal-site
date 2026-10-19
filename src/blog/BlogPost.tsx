@@ -6,10 +6,12 @@
  * Dependencies: react-router-dom, marked, ../blog/blogLoader
  */
 
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { marked } from 'marked'
 import { getAllPosts, getPostBySlug } from './blogLoader'
+import { SITE_NAME } from '../seo/site'
+import { useHead } from '../seo/useHead'
 import './BlogPost.css'
 
 // Configure marked for GitHub-flavored Markdown
@@ -49,17 +51,24 @@ export default function BlogPost() {
     return marked.parse(post.content) as string
   }, [post])
 
-  // SEO: update document title
-  useEffect(() => {
-    if (post) {
-      document.title = post.seoTitle ?? post.title
-    } else {
-      document.title = 'Post Not Found'
-    }
-    return () => {
-      document.title = 'Facundo Presa — Portfolio'
-    }
-  }, [post])
+  // Prerendered at build time (vite-plugins/seo.ts); this keeps the head right
+  // when the reader navigates here inside the SPA.
+  useHead(
+    post
+      ? {
+          title: post.seoTitle ?? post.title,
+          description: post.seoDescription ?? post.description,
+          path: `/blog/${post.slug}`,
+          type: 'article',
+          image: post.cover || undefined,
+        }
+      : {
+          title: `Post not found — ${SITE_NAME}`,
+          description: 'This post does not exist.',
+          path: `/blog/${slug ?? ''}`,
+          noindex: true,
+        },
+  )
 
   /* ─── 404 State ─── */
   if (!post) {

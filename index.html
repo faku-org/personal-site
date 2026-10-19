@@ -2,10 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Facundo Presa — Entrepreneur, Design & Programming" />
-    <title>Facundo Presa — Portfolio</title>
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
+    <!-- Title, description, canonical, Open Graph, Twitter and JSON-LD are
+         generated per route by vite-plugins/seo.ts. -->
+    <!--seo:head--><!--/seo:head-->
     <script>
       // Resolve the colour scheme before first paint. Without this, a reader who
       // prefers dark gets a white flash while React mounts, because the tokens in
@@ -28,7 +33,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <div id="root"></div>
+    <!-- Static fallback for crawlers that do not run JS; React replaces it on mount. -->
+    <div id="root"><!--seo:body--><!--/seo:body--></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -20,7 +20,11 @@ export function useAutoSave(
   const [saveStatus, setSaveStatus] = useState<SaveStatus>('idle')
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const dtoRef = useRef(dto)
-  dtoRef.current = dto
+
+  // Keep the latest DTO reachable from the timer without re-arming it.
+  useEffect(() => {
+    dtoRef.current = dto
+  })
 
   // Serialized DTO for stable dependency comparison
   const dtoKey = JSON.stringify(dto)

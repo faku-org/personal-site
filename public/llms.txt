@@ -76,4 +76,5 @@ its evolution over time. Available in English and Spanish.
 
 ## Optional
 
+- [Full content](https://facupresa.com/llms-full.txt): Every project's story and milestones, plus all blog posts, as one plain-text file.
 - [Blog](https://facupresa.com/blog): Writing.
