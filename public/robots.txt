@@ -1,4 +1,26 @@
+# Everything is public and meant to be found — by search engines and by AI
+# answer engines. The named groups below are declarative: they make the policy
+# explicit per crawler, so it survives if the wildcard rule is ever tightened.
+
 User-agent: *
+Allow: /
+
+# AI search / retrieval and user-triggered fetchers
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Applebot
+Allow: /
+
+# AI training crawlers
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://facupresa.com/sitemap.xml

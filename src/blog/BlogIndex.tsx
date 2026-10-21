@@ -10,6 +10,8 @@ import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { getAllPosts, getAllTags } from './blogLoader'
 import type { BlogPost } from './blogLoader'
+import { BLOG_DESCRIPTION, BLOG_TITLE } from '../seo/site'
+import { useHead } from '../seo/useHead'
 import './BlogIndex.css'
 
 /* ─── Date Filter Options ─── */
@@ -54,6 +56,7 @@ function truncate(text: string, max: number): string {
 /* ─── Component ─── */
 
 export default function BlogIndex() {
+  useHead({ title: BLOG_TITLE, description: BLOG_DESCRIPTION, path: '/blog' })
   const posts = getAllPosts()
   const allTags = getAllTags()
 
