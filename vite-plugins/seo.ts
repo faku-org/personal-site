@@ -127,6 +127,17 @@ const website = {
   description: DEFAULT_DESCRIPTION,
   inLanguage: ['en', 'es'],
   publisher: { '@id': PERSON_ID },
+  // Freshness signal for answer engines: the day this build was made.
+  dateModified: new Date().toISOString().slice(0, 10),
+}
+
+/** Ties the person to the studio as its founder, so engines connect both entities. */
+const wefaber = {
+  '@type': 'Organization',
+  '@id': 'https://wefaber.net/#org',
+  name: 'WeFaber',
+  url: 'https://wefaber.net',
+  founder: { '@id': PERSON_ID },
 }
 
 /* ─── Pages ─── */
@@ -223,6 +234,30 @@ function homePage(posts: Post[]): Page {
 
   const socials = socialLinks.map((s) => `<a href="${esc(s.url)}">${esc(s.label)}</a>`).join(' · ')
 
+  // Questions people ask answer engines, answered only from the facts above.
+  const faq = [
+    { q: `Who is ${siteConfig.name}?`, a: DEFAULT_DESCRIPTION },
+    {
+      q: `What has ${siteConfig.name} built?`,
+      a: `Projects in chronological order: ${byStart.map((p) => p.title).join(', ')}.`,
+    },
+    {
+      q: `Where does ${siteConfig.name} publish his work?`,
+      a: orgs.map((o) => `${o.name} (${o.url})`).join(', ') + '.',
+    },
+    { q: `How can I contact ${siteConfig.name}?`, a: `By email at ${siteConfig.email}.` },
+  ]
+  const faqHtml = faq.map((f) => `<h3>${esc(f.q)}</h3>\n        <p>${esc(f.a)}</p>`).join('\n        ')
+  const faqGraph = {
+    '@type': 'FAQPage',
+    '@id': `${SITE_URL}/#faq`,
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  }
+
   const body = `
       <main data-prerender>
         <h1>${esc(siteConfig.name)}</h1>
@@ -235,6 +270,8 @@ function homePage(posts: Post[]): Page {
         <h2>Projects</h2>
         <ul>${projectItems}</ul>
         ${posts.length > 0 ? '<p><a href="/blog/">Blog</a></p>' : ''}
+        <h2>Questions</h2>
+        ${faqHtml}
         <h2>Contact</h2>
         <p><a href="mailto:${esc(siteConfig.email)}">${esc(siteConfig.email)}</a></p>
         <p>${socials}</p>
@@ -247,7 +284,7 @@ function homePage(posts: Post[]): Page {
     description: DEFAULT_DESCRIPTION,
     type: 'website',
     image: absoluteUrl(OG_IMAGE.path),
-    graph: [website, person],
+    graph: [website, person, wefaber, faqGraph],
     body,
   }
 }
